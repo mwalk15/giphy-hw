@@ -9,15 +9,16 @@ var topics = ["Happy", "Sad", "Anxious", "Angry", "Sleepy", "Witty", "Hot", "Cra
     var mood = $(this).attr("data-name");
     console.log(mood);
 
-    var queryURL = "https://api.giphy.com/v1/search?q=" + mood + "&api_key=49fNGiTIkHzMvqZ59HcoBOxVx0XF71kk&limit=10";
-  
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + mood + "&api_key=49fNGiTIkHzMvqZ59HcoBOxVx0XF71kk&limit=10";
+  console.log(queryURL);
 
       $.ajax({
             url: queryURL,
             method: "GET",
-            dataType: 'jsonp',
+            dataType: 'json',
       }).done(function(response) {
             console.log(queryURL);
+            console.log(response);
 
             var results = response.data;
             console.log(results);
@@ -30,6 +31,8 @@ var topics = ["Happy", "Sad", "Anxious", "Angry", "Sleepy", "Witty", "Hot", "Cra
             var p = $("<p>").text("Rating: " + rating);
             var AnimatedSrc = results[i].images.fixed_height.url;
             var staticSrc = results[i].images.fixed_height_still.url;
+
+
             var moodImage = $("<img>");
           
 
@@ -43,6 +46,8 @@ var topics = ["Happy", "Sad", "Anxious", "Angry", "Sleepy", "Witty", "Hot", "Cra
             $("#gifArea").prepend(moodDiv);
 
           }
+      }).catch(function(errCode){
+        console.log(errCode)
       });
   }
 
@@ -61,7 +66,7 @@ var topics = ["Happy", "Sad", "Anxious", "Angry", "Sleepy", "Witty", "Hot", "Cra
       $("#buttons-view").empty();
       for (var i = 0; i < topics.length; i++) {
         var a = $('<button>');
-          a.attr("id", "buttons-view");
+          a.attr("id", "buttonsDiv");
           a.attr("data-name", topics[i]);
           a.text(topics[i]);
         $("#buttons-view").append(a);
@@ -70,7 +75,7 @@ var topics = ["Happy", "Sad", "Anxious", "Angry", "Sleepy", "Witty", "Hot", "Cra
   displayButtons();
 
   
-  $(document).on("click", "#buttons-view", displayMoodGif);
+  $(document).on("click", "#buttonsDiv", displayMoodGif);
 
   
   $(document).on("click", ".moodGiphy", gifMovements);
