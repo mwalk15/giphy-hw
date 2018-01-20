@@ -1,0 +1,21 @@
+body {
+	background-color: black
+}
+
+.jumbotron {
+	border: solid blue 2px;
+	background-image: url("background2.jpg");
+	background-position: fixed;
+}
+
+h1 {
+	font-size: 42px;
+	font-weight: bold;
+	font-family: 'Indie Flower', cursive;
+	text-align: center;
+	color: blue;
+}
+
+label {
+	color: white;
+}
